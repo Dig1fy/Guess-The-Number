@@ -25,7 +25,7 @@ const generateNumberBetween = (min, max, exclude) => {
 
 const renderListItems = (value, numberOfRound) => {
     return <View key={value} style={styles.listItem}>
-        <BodyText>Round #{numberOfRound} :</BodyText>
+        <BodyText>Round #{numberOfRound} : </BodyText>
         <BodyText>{value}</BodyText>
     </View>
 }
@@ -89,9 +89,11 @@ const GameScreen = props => {
                     />
                 </PrimaryButton>
             </Card>
-            <ScrollView >
-                {pastGuesses.map((guess, index) => renderListItems(guess, index + 1))}
-            </ScrollView>
+            <View style={styles.listContainer}>
+                <ScrollView contentContainerStyle={styles.list}>
+                    {pastGuesses.map((guess, index) => renderListItems(guess, index + 1))}
+                </ScrollView>
+            </View>
             <View><BodyText>Current gueesses: {pastGuesses.length}</BodyText></View>
         </View>
     )
@@ -118,6 +120,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         color: 'white'
     },
+    listContainer: {
+        width: '45%',
+        flex: 1,
+        flexGrow: 1
+    },
+    list: {
+        flexGrow: 1,
+        justifyContent: 'flex-end'
+    },
     listItem: {
         borderColor: Colors.green,
         borderWidth: 1,
@@ -125,8 +136,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 10,
         marginVertical: 10,
-        width: 300,
-        maxWidth: '100%',
         justifyContent: 'space-between'
     }
 })
