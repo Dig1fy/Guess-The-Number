@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer/NumberContainer';
 import Card from '../components/Card/Card';
+import BodyText from '../components/Common/BodyText';
 
 const generateNumberBetween = (min, max, exclude) => {
     //Generate inclusive min/max number
@@ -49,7 +50,7 @@ const GameScreen = props => {
 
     return (
         <View style={styles.screen}>
-            <Text>Current Guess</Text>
+            <BodyText>Current Guess</BodyText>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
                 <Button title="Lower" onPress={nextGuessHandler.bind(this, 'lower')} />

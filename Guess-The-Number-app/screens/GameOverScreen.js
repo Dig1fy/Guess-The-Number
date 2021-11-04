@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import BodyText from '../components/Common/BodyText';
 
 const GameOverScreen = props => {
     return (
@@ -13,8 +14,8 @@ const GameOverScreen = props => {
                 />
             </View>
             <View style={styles.gameOver}>
-                <Text style={styles.text}>Total rounds:</Text>
-                <Text style={styles.text}>{props.totalTries}</Text>
+                <BodyText style={styles.text}>Total rounds:</BodyText>
+                <BodyText style={styles.text}>{props.totalTries}</BodyText>
             </View>
             <View>
                 <Button title="Restart" onPress={props.onRestart} />

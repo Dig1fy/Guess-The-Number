@@ -5,6 +5,7 @@ import Card from '../components/Card/Card'
 import Colors from '../constants/Colors'
 import Input from '../components/Input/Input'
 import NumberContainer from "../components/NumberContainer/NumberContainer";
+import BodyText from "../components/Common/BodyText";
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -38,7 +39,7 @@ const StartGameScreen = props => {
     if (confirmed) {
         confirmedOutput =
             <Card style={styles.outputContainer}>
-                <Text>Chosen number: </Text>
+                <BodyText>Chosen number: </BodyText>
                 <NumberContainer> {selectedNumber}</NumberContainer>
                 <Button title="START GAME" onPress={() => props.click(selectedNumber)} />
             </Card>
@@ -48,9 +49,9 @@ const StartGameScreen = props => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start new game!</Text>
+                <BodyText style={styles.title}>Start new game!</BodyText>
                 <Card style={styles.inputContainer}>
-                    <Text >Guess a number</Text>
+                    <BodyText >Guess a number</BodyText>
                     < Input style={styles.input}
                         keyboardType="number-pad"
                         maxLength={2}
