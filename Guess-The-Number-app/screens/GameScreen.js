@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Alert, ScrollView, Text, FlatList } from 'react-native';
 
 //Icons
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
@@ -23,17 +23,19 @@ const generateNumberBetween = (min, max, exclude) => {
     }
 }
 
-const renderListItems = (value, numberOfRound) => {
-    return <View key={value} style={styles.listItem}>
-        <BodyText>Round #{numberOfRound} : </BodyText>
-        <BodyText>{value}</BodyText>
+const renderListItems = (listOfGuessesLength, itemData) => {
+    //itemData is being passed from FlatList (renderItem) as an additional param
+    return <View style={styles.listItem}>
+        <BodyText>Round #{listOfGuessesLength - itemData.index} : </BodyText>
+        <BodyText>{itemData.item}</BodyText>
     </View>
 }
 
 const GameScreen = props => {
     const initialGuess = generateNumberBetween(1, 99, props.excludeNumber);
-    const [currentGuess, setCurrentGuess] = useState(initialGuess)
-    const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+    //We need strings for the 'key' of FlatLish -> KeyExtractor
+    const [currentGuess, setCurrentGuess] = useState(initialGuess.toString())
+    const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
 
     const currentMinValue = useRef(1);
     const currentMaxValue = useRef(99);
@@ -57,12 +59,12 @@ const GameScreen = props => {
         } else {
             currentMinValue.current = currentGuess + 1;
         }
-        // setTotalRounds((currentRounds) => currentRounds + 1)
+
         //We can't use the 'currentGuess' since it's not been re-rendered yeb
         const nextGuessNumber = generateNumberBetween(currentMinValue.current, currentMaxValue.current, currentGuess)
         setCurrentGuess(nextGuessNumber)
-
-        setPastGuesses(theLastGuesses => [nextGuessNumber, ...theLastGuesses])
+        //We need string for the 'key' of FlatLish -> KeyExtractor
+        setPastGuesses(theLastGuesses => [nextGuessNumber.toString(), ...theLastGuesses])
     }
 
     return (
@@ -90,9 +92,15 @@ const GameScreen = props => {
                 </PrimaryButton>
             </Card>
             <View style={styles.listContainer}>
-                <ScrollView contentContainerStyle={styles.list}>
+                {/* <ScrollView contentContainerStyle={styles.list}>
                     {pastGuesses.map((guess, index) => renderListItems(guess, index + 1))}
-                </ScrollView>
+                </ScrollView> */}
+                <FlatList
+                    data={pastGuesses}
+                    renderItem={renderListItems.bind(this, pastGuesses.length)}
+                    keyExtractor={key => key}
+                    contentContainerStyle={styles.list}
+                />
             </View>
             <View><BodyText>Current gueesses: {pastGuesses.length}</BodyText></View>
         </View>
