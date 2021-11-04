@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native';
 
 //Icons
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
@@ -8,6 +8,7 @@ import NumberContainer from '../components/NumberContainer/NumberContainer';
 import Card from '../components/Card/Card';
 import BodyText from '../components/Common/BodyText';
 import PrimaryButton from '../components/Common/PrimaryButton';
+import Colors from '../constants/Colors';
 
 const generateNumberBetween = (min, max, exclude) => {
     //Generate inclusive min/max number
@@ -22,16 +23,25 @@ const generateNumberBetween = (min, max, exclude) => {
     }
 }
 
+const renderListItems = (value, numberOfRound) => {
+    return <View key={value} style={styles.listItem}>
+        <BodyText>Round #{numberOfRound} :</BodyText>
+        <BodyText>{value}</BodyText>
+    </View>
+}
+
 const GameScreen = props => {
-    const [currentGuess, setCurrentGuess] = useState(generateNumberBetween(1, 99, props.excludeNumber))
-    const [totalRounds, setTotalRounds] = useState(0);
+    const initialGuess = generateNumberBetween(1, 99, props.excludeNumber);
+    const [currentGuess, setCurrentGuess] = useState(initialGuess)
+    const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+
     const currentMinValue = useRef(1);
     const currentMaxValue = useRef(99);
     const { userChoice, onGameOver } = props;
 
     useEffect(() => {
         if (currentGuess === userChoice) {
-            onGameOver(totalRounds);
+            onGameOver(pastGuesses.length);
         }
     }, [currentGuess, userChoice, onGameOver])
 
@@ -47,9 +57,12 @@ const GameScreen = props => {
         } else {
             currentMinValue.current = currentGuess + 1;
         }
-        setTotalRounds((currentRounds) => currentRounds + 1)
+        // setTotalRounds((currentRounds) => currentRounds + 1)
+        //We can't use the 'currentGuess' since it's not been re-rendered yeb
         const nextGuessNumber = generateNumberBetween(currentMinValue.current, currentMaxValue.current, currentGuess)
         setCurrentGuess(nextGuessNumber)
+
+        setPastGuesses(theLastGuesses => [nextGuessNumber, ...theLastGuesses])
     }
 
     return (
@@ -76,6 +89,10 @@ const GameScreen = props => {
                     />
                 </PrimaryButton>
             </Card>
+            <ScrollView >
+                {pastGuesses.map((guess, index) => renderListItems(guess, index + 1))}
+            </ScrollView>
+            <View><BodyText>Current gueesses: {pastGuesses.length}</BodyText></View>
         </View>
     )
 }
@@ -100,6 +117,17 @@ const styles = StyleSheet.create({
     buttonGreater: {
         backgroundColor: 'green',
         color: 'white'
+    },
+    listItem: {
+        borderColor: Colors.green,
+        borderWidth: 1,
+        borderRadius: 10,
+        flexDirection: 'row',
+        padding: 10,
+        marginVertical: 10,
+        width: 300,
+        maxWidth: '100%',
+        justifyContent: 'space-between'
     }
 })
 
