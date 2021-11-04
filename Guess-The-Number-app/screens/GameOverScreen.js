@@ -14,8 +14,8 @@ const GameOverScreen = props => {
                 />
             </View>
             <View style={styles.gameOver}>
-                <BodyText style={styles.text}>Total rounds:</BodyText>
-                <BodyText style={styles.text}>{props.totalTries}</BodyText>
+                <Text style={styles.text}>Your phone managed to guess the number in: </Text>
+                <BodyText style={styles.gameResult} >{props.totalTries} rounds</BodyText>
             </View>
             <View>
                 <Button title="Restart" onPress={props.onRestart} />
@@ -37,11 +37,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        textShadowColor: "blue",
+        textShadowColor: "#CCF",
+        textShadowRadius: 2,
+        textShadowOffset: { width: 2, height: 1 },
+        fontSize: 19,
+    },
+    gameResult: {
+        fontSize: 20,
+        color: '#ab872b',
+        fontWeight: 'bold',
+        textShadowColor: "#2f6891",
         textShadowRadius: 2,
         textShadowOffset: { width: 1, height: 1 },
-        elevation: 5,
-        fontSize: 22,
     },
     imageContainer: {
         width: 300,
