@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
+
+//Icons
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 
 import NumberContainer from '../components/NumberContainer/NumberContainer';
 import Card from '../components/Card/Card';
 import BodyText from '../components/Common/BodyText';
+import PrimaryButton from '../components/Common/PrimaryButton';
 
 const generateNumberBetween = (min, max, exclude) => {
     //Generate inclusive min/max number
@@ -53,8 +57,24 @@ const GameScreen = props => {
             <BodyText>Current Guess</BodyText>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <Button title="Lower" onPress={nextGuessHandler.bind(this, 'lower')} />
-                <Button title="Greater" onPress={nextGuessHandler.bind(this, 'greater')} />
+                <PrimaryButton
+                    onPress={nextGuessHandler.bind(this, 'lower')}
+                    style={styles.buttonLower}>
+                    <SimpleLineIcons
+                        name="minus"
+                        size={24}
+                        color="black"
+                    />
+                </PrimaryButton>
+                <PrimaryButton
+                    onPress={nextGuessHandler.bind(this, 'greater')}
+                    style={styles.buttonGreater}>
+                    <SimpleLineIcons
+                        name="plus"
+                        size={24}
+                        color="white"
+                    />
+                </PrimaryButton>
             </Card>
         </View>
     )
@@ -72,6 +92,14 @@ const styles = StyleSheet.create({
         marginTop: 15,
         width: 300,
         maxWidth: '80%',
+    },
+    buttonLower: {
+        backgroundColor: 'orange',
+        color: 'black'
+    },
+    buttonGreater: {
+        backgroundColor: 'green',
+        color: 'white'
     }
 })
 

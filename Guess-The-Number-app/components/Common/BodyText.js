@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
         fontFamily: 'notoserif',
         textShadowColor: 'gray',
         textShadowRadius: 2,
-        textShadowOffset: { width: 1, height: 1 }
+        textShadowOffset: { width: 1, height: 1 },
+        textAlign: 'center',
     }
 })
 

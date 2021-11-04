@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from 'react-native';
 
-const Card = props => {
+const Card = props => { //This way, we get all the card styles and merge them with the props.styles
     return <View style={{ ...styles.card, ...props.style }}>{props.children}</View >
 }
 
