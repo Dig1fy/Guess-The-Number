@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, StyleSheet, Text, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions } from 'react-native';
 
 import Card from '../components/Card/Card'
 import Colors from '../constants/Colors'
@@ -41,8 +41,8 @@ const StartGameScreen = props => {
         confirmedOutput =
             <Card style={styles.outputContainer}>
                 <BodyText>Chosen number: </BodyText>
-                <NumberContainer> {selectedNumber}</NumberContainer>
-                <PrimaryButton onPress={() => props.click(selectedNumber)} > START GAME </PrimaryButton>
+                <NumberContainer style={styles.numberContainer}> {selectedNumber}</NumberContainer>
+                <PrimaryButton style={styles.startButton} onPress={() => props.click(selectedNumber)} > START GAME </PrimaryButton>
             </Card>
     }
 
@@ -89,27 +89,40 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 15,
+        marginTop: Dimensions.get('window').height > 600 ? 5 : 0
     },
     title: {
         fontSize: 20,
         marginVertical: 10,
     },
     inputContainer: { //These styles will overwrite the ones in Card component
-        width: 300,
-        maxWidth: '80%',
+        // width: '90%',
+        // maxWidth: '95%',
+        minWidth: Dimensions.get('window').width * 0.9,
+        width: Dimensions.get('window').width * 0.9,
         alignItems: 'center',
     },
     button: {
         width: '40%',
     },
     input: {
-        width: '35 %',
+        width: '35%',
         textAlign: 'center',
     },
     outputContainer: {
         marginTop: 25,
         width: '60%',
         alignItems: 'center'
+    },
+    startButton: {
+        width: Dimensions.get('window').width * 0.4,
+        fontSize: 14,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    numberContainer: {
+        width: '50%',
     }
 })
 

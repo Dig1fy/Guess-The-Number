@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, Dimensions } from 'react-native';
 import BodyText from '../components/Common/BodyText';
 import MainButton from '../components/Common/PrimaryButton'
 
@@ -52,8 +52,12 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
     },
     imageContainer: {
-        width: 300,
-        height: 300,
+        maxWidth: 300,
+        maxHeight: 300,
+        minWidth: 200,
+        minHeight: 200,
+        width: Dimensions.get('window').width * 0.6,
+        height: Dimensions.get('window').height * 0.3,
         borderRadius: 150,
         borderWidth: 4,
         borderColor: 'purple',

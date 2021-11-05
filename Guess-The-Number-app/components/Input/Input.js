@@ -3,7 +3,7 @@ import { TextInput, StyleSheet } from 'react-native';
 
 const Input = props => {
     return (
-        <TextInput {...props} placeholder='Type a number' style={{ ...styles.screen, ...props.style }} />
+        <TextInput {...props} placeholder='Type here' style={{ ...styles.screen, ...props.style }} />
     )
 }
 

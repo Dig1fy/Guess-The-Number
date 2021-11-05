@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Alert, ScrollView, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Alert, ScrollView, Text, FlatList, Dimensions } from 'react-native';
 
 //Icons
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
@@ -33,9 +33,9 @@ const renderListItems = (listOfGuessesLength, itemData) => {
 
 const GameScreen = props => {
     const initialGuess = generateNumberBetween(1, 99, props.excludeNumber);
-    //We need strings for the 'key' of FlatLish -> KeyExtractor
-    const [currentGuess, setCurrentGuess] = useState(initialGuess.toString())
-    const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
+
+    const [currentGuess, setCurrentGuess] = useState(initialGuess)
+    const [pastGuesses, setPastGuesses] = useState([initialGuess]);
 
     const currentMinValue = useRef(1);
     const currentMaxValue = useRef(99);
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     listContainer: {
-        width: '45%',
+        width: Dimensions.get('window').width < 350 ? '55%' : '45%',
         flex: 1,
         flexGrow: 1
     },
