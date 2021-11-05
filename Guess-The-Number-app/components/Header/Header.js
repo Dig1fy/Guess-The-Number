@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import BodyText from "../Common/BodyText";
 
 const Header = (props) => {

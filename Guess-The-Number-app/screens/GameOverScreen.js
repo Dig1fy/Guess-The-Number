@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 25,
+        paddingBottom: 25,
     },
     gameOver: {
         marginVertical: 25,
