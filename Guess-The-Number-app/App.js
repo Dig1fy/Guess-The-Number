@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import * as Font from 'expo-font'
-import { AppLoading } from 'expo'
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 import Header from './components/Header/Header';
 import StartGameScreen from './screens/StartGameScreen';
@@ -12,7 +9,6 @@ import GameOverScreen from './screens/GameOverScreen';
 export default function App() {
   const [userNumber, setUserNumber] = useState()
   const [numberOfTries, setNumberOfTries] = useState(0)
-  const [dataLoaded, setDataLoaded] = useState(false);
 
   const restartGameHandler = () => {
     setNumberOfTries(0);
@@ -39,16 +35,15 @@ export default function App() {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <Header title='Guess a number' />
       {currentScreen}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-
   }
 });
