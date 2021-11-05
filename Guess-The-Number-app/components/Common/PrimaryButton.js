@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         textShadowColor: Colors.green,
         textShadowRadius: 25,
         textShadowOffset: { width: 11, height: 11 },
-
     },
     button: {
         backgroundColor: Colors.lightBlue,
@@ -29,7 +28,8 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         textShadowColor: Colors.green,
         textShadowRadius: 25,
-        textShadowOffset: { width: 11, height: 11 }
+        textShadowOffset: { width: 11, height: 11 },
+        alignItems: 'center'
     },
     buttonText: {
         color: 'white',
@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
         textShadowColor: Colors.lightBlue,
         textShadowRadius: 1,
         textShadowOffset: { width: 1, height: 1 },
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 })
 

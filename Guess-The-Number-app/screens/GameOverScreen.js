@@ -1,27 +1,29 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, Image, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, Dimensions, ScrollView } from 'react-native';
 import BodyText from '../components/Common/BodyText';
 import MainButton from '../components/Common/PrimaryButton'
 
 const GameOverScreen = props => {
     return (
-        <View style={styles.screen}>
-            <View style={styles.imageContainer}>
-                <Image
-                    // source={require('../assets/Images/go.png')}
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFxPargZuBWMkwYNo7Yeq3kRPhSfUTgYXXs6E5CPZWX7gl4Efh28pztjqnHvWkuX6O-gI&usqp=CAU' }}
-                    style={styles.image}
-                    fadeDuration={5000}
-                />
+        <ScrollView>
+            <View style={styles.screen}>
+                <View style={styles.imageContainer}>
+                    <Image
+                        // source={require('../assets/Images/go.png')}
+                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFxPargZuBWMkwYNo7Yeq3kRPhSfUTgYXXs6E5CPZWX7gl4Efh28pztjqnHvWkuX6O-gI&usqp=CAU' }}
+                        style={styles.image}
+                        fadeDuration={5000}
+                    />
+                </View>
+                <View style={styles.gameOver}>
+                    <Text style={styles.text}>Your phone managed to guess the number in: </Text>
+                    <BodyText style={styles.gameResult} >{props.totalTries} rounds</BodyText>
+                </View>
+                <View>
+                    <MainButton onPress={props.onRestart}>Restart</MainButton>
+                </View>
             </View>
-            <View style={styles.gameOver}>
-                <Text style={styles.text}>Your phone managed to guess the number in: </Text>
-                <BodyText style={styles.gameResult} >{props.totalTries} rounds</BodyText>
-            </View>
-            <View>
-                <MainButton onPress={props.onRestart}>Restart</MainButton>
-            </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -41,10 +43,11 @@ const styles = StyleSheet.create({
         textShadowColor: "#CCF",
         textShadowRadius: 2,
         textShadowOffset: { width: 2, height: 1 },
-        fontSize: 19,
+        fontSize: Dimensions.get('window').height < 400 ? 16 : 20,
+        textAlign: 'center'
     },
     gameResult: {
-        fontSize: 20,
+        fontSize: Dimensions.get('window').height < 400 ? 16 : 20,
         color: '#ab872b',
         fontWeight: 'bold',
         textShadowColor: "#2f6891",
@@ -52,17 +55,14 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
     },
     imageContainer: {
-        maxWidth: 300,
-        maxHeight: 300,
-        minWidth: 200,
-        minHeight: 200,
-        width: Dimensions.get('window').width * 0.6,
-        height: Dimensions.get('window').height * 0.3,
-        borderRadius: 150,
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,
         borderWidth: 4,
         borderColor: 'purple',
         overflow: 'hidden',
-        marginVertical: 5
+        //2.5%
+        marginVertical: Dimensions.get('window').height / 40
     },
     image: {
         width: '100%',

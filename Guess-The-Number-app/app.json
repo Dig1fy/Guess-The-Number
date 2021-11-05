@@ -3,7 +3,7 @@
     "name": "Guess-The-Number-app",
     "slug": "Guess-The-Number-app",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "defaulta",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
