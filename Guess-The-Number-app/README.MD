@@ -1,4 +1,4 @@
-React-native game called "Guess the number".
+Small practice app.
 
 To test the game locally, youll need to type the following:
 *npm i
